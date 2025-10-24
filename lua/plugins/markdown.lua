@@ -11,6 +11,7 @@ return {
   config = function()
     require("render-markdown").setup({
       render_modes = { "n", "c", "t" },
+      latex = { enabled = false }
     })
   end,
 }
