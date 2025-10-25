@@ -1,0 +1,11 @@
+{
+	"contributes": {
+		"snippets": [
+      {
+        "language": "verilog",
+        "path": "./verilog.json"
+      }
+		]
+	},
+	"name": "my-snippets"
+}

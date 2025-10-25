@@ -30,17 +30,21 @@ map("x", "s",  function() require("pounce").pounce({}) end)
 map("o", "gs", function() require("pounce").pounce({}) end)
 
 -- Dial
-map("n", "<C-a>",  function() require("dial.map").manipulate("increment", "normal") end)
-map("n", "<C-x>",  function() require("dial.map").manipulate("decrement", "normal") end)
+map("n", "<C-a>",  function() require("dial.map").manipulate("increment", "normal")  end)
+map("n", "<C-x>",  function() require("dial.map").manipulate("decrement", "normal")  end)
 map("n", "<C-ga>", function() require("dial.map").manipulate("increment", "gnormal") end)
 map("n", "<C-gx>", function() require("dial.map").manipulate("decrement", "gnormal") end)
-map("v", "<C-a>",  function() require("dial.map").manipulate("increment", "visual") end)
-map("v", "<C-x>",  function() require("dial.map").manipulate("decrement", "visual") end)
+map("v", "<C-a>",  function() require("dial.map").manipulate("increment", "visual")  end)
+map("v", "<C-x>",  function() require("dial.map").manipulate("decrement", "visual")  end)
 map("v", "<C-ga>", function() require("dial.map").manipulate("increment", "gvisual") end)
 map("v", "<C-gx>", function() require("dial.map").manipulate("decrement", "gvisual") end)
 
 -- vim-easy-align
-map("v", "ga", "<Plug>(EasyAlign)")
-map("n", "ga", "<Plug>(EasyAlign)")
+-- map("v", "ga", "<Plug>(EasyAlign)")
+-- map("n", "ga", "<Plug>(EasyAlign)")
 
+-- nvim-scissors
+map( "n", "<leader>se",          function() require("scissors").editSnippet()   end, { desc = "Snippet: Edit" })
+map( { "n", "x" }, "<leader>sa", function() require("scissors").addNewSnippet() end, { desc = "Snippet: Add" }
+)
 

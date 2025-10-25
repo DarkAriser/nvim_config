@@ -1,16 +1,1 @@
-{
-  "generate block": {
-    "prefix": "gene",
-    "body": [
-      "generate // {",
-      "\n\t${0}",
-      "\nendgenerate // }"
-    ],
-    "description": "generate block"
-  },
-  "timescale": {
-    "prefix": "`time",
-    "body": "`timescale ${1:1ps}/${2:1ps}",
-    "description": "timescale"
-  }
-}
+{"regdef":{"body":["wire ${1:sig}_d;","wire ${1:sig}_q;","wire ${1:sig}_en;"],"prefix":"regdefvec"},"generate block":{"body":["generate // {","\t${0}","endgenerate // }"],"prefix":"gene","description":"generate block"},"assi":{"body":"assign ${1:lhs} = ${0:rhs};","prefix":"assi"},"regdef":{"body":["wire [${1:SIZE}-1:0] ${2:sig}_d;","wire [${1:SIZE}-1:0] ${2:sig}_q;","wire ${2:sig}_en;"],"prefix":"regdefvec"},"timescale":{"description":"timescale","prefix":"`time","body":"`timescale ${1:1ps}/${2:1ps}"}}

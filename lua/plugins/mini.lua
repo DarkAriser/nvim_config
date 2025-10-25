@@ -1,6 +1,9 @@
 return {
   "nvim-mini/mini.nvim",
   config = function()
+    --------------------------------------------------
+    ---  Move
+    --------------------------------------------------
     require("mini.move").setup({
       -- Module mappings. Use `''` (empty string) to disable one.
       mappings = {
@@ -23,6 +26,10 @@ return {
         reindent_linewise = true,
       },
     })
+
+    --------------------------------------------------
+    ---  Snippets
+    --------------------------------------------------
     local gen_loader = require("mini.snippets").gen_loader
     require("mini.snippets").setup({
       snippets = {
@@ -33,6 +40,45 @@ return {
         -- "snippets/" subdirectories from 'runtimepath' directories.
         gen_loader.from_lang(),
       },
+    })
+
+    --------------------------------------------------
+    ---  CursorWord
+    --------------------------------------------------
+    require("mini.cursorword").setup({})
+
+    --------------------------------------------------
+    ---  Align
+    --------------------------------------------------
+    require("mini.align").setup({
+      -- Module mappings. Use `''` (empty string) to disable one.
+      mappings = {
+        start = "ga",
+        start_with_preview = "gA",
+      },
+
+      -- Modifiers changing alignment steps and/or options
+      --  modifiers = {
+      --    -- Main option modifiers
+      --    ['s'] = --<function: enter split pattern>,
+      --    ['j'] = --<function: choose justify side>,
+      --    ['m'] = --<function: enter merge delimiter>,
+      --
+      --    -- Modifiers adding pre-steps
+      --    ['f'] = --<function: filter parts by entering Lua expression>,
+      --    ['i'] = --<function: ignore some split matches>,
+      --    ['p'] = --<function: pair parts>,
+      --    ['t'] = --<function: trim parts>,
+      --
+      --    -- Delete some last pre-step
+      --    ['<BS>'] = --<function: delete some last pre-step>,
+      --
+      --    -- Special configurations for common splits
+      --    ['='] = --<function: enhanced setup for '='>,
+      --    [','] = --<function: enhanced setup for ','>,
+      --    ['|'] = --<function: enhanced setup for '|'>,
+      --    [' '] = --<function: enhanced setup for ' '>,
+      --  },
     })
   end,
 }
