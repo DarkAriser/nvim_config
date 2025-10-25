@@ -1,0 +1,16 @@
+{
+  "generate block": {
+    "prefix": "gene",
+    "body": [
+      "generate // {",
+      "\n\t${0}",
+      "\nendgenerate // }"
+    ],
+    "description": "generate block"
+  },
+  "timescale": {
+    "prefix": "`time",
+    "body": "`timescale ${1:1ps}/${2:1ps}",
+    "description": "timescale"
+  }
+}
