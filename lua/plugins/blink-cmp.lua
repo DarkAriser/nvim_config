@@ -4,6 +4,7 @@ return {
     -- optional: provides snippets for the snippet source
     -- dependencies = { "rafamadriz/friendly-snippets" },
     dependencies = "nvim-mini/mini.nvim",
+    -- dependencies = { "L3MON4D3/LuaSnip" },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
