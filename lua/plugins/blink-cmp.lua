@@ -2,15 +2,20 @@ return {
   {
     "saghen/blink.cmp",
     -- optional: provides snippets for the snippet source
-    dependencies = { "rafamadriz/friendly-snippets" },
+    -- dependencies = { "rafamadriz/friendly-snippets" },
+    dependencies = "nvim-mini/mini.nvim",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
+      snippets = { preset = "mini_snippets" },
       keymap = {
         -- disable the default <CR> accepting suggestion
         ["<CR>"] = false,
         -- set Ctrl+f to accept instead
-        ["<C-f>"] = { 'accept', 'fallback' },
+        ["<C-f>"] = { "accept", "fallback" },
+      },
+      sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
       },
     },
   },
