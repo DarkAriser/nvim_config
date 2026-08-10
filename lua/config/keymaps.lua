@@ -13,7 +13,6 @@ map("v", "//", '"fy/\\v<C-R>"<CR>',                {silent=true, desc="Search fo
 map("",  ",/", "<Cmd>lvim // %<CR><Cmd>lopen<CR>", {silent=true, desc="Open search results in scratch buffer", noremap=true})
 map("", ",j", "<Cmd>lnext<CR>zz", {silent=true, desc="Goto next lvim result", noremap=true})
 map("", ",k", "<Cmd>lprev<CR>zz", {silent=true, desc="Goto prev lvim result", noremap=true})
-
 map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc="Exit terminal mode" })
 
 --   Cuts
@@ -24,22 +23,22 @@ map("n", ",dd", '"+dd', { noremap=true, desc = "Delete line and copy" })
 map("n", ",D",  '"+D',  { noremap=true, desc = "Delete remaining line and copy" })
 
 -- Pounce
-local pounce = require("pounce").pounce
-map("n", "s",  function() pounce({}) end)
-map("n", "S",  function() pounce({ do_repeat = true }) end)
-map("x", "s",  function() pounce({}) end)
-map("o", "gs", function() pounce({}) end)
+-- local pounce = require("pounce").pounce
+-- map("n", "s",  function() pounce({}) end)
+-- map("n", "S",  function() pounce({ do_repeat = true }) end)
+-- map("x", "s",  function() pounce({}) end)
+-- map("o", "gs", function() pounce({}) end)
 
 -- Dial
-local dialmanip = require("dial.map").manipulate
-map("n", "<C-a>",  function() dialmanip("increment", "normal")  end)
-map("n", "<C-x>",  function() dialmanip("decrement", "normal")  end)
-map("n", "<C-ga>", function() dialmanip("increment", "gnormal") end)
-map("n", "<C-gx>", function() dialmanip("decrement", "gnormal") end)
-map("v", "<C-a>",  function() dialmanip("increment", "visual")  end)
-map("v", "<C-x>",  function() dialmanip("decrement", "visual")  end)
-map("v", "<C-ga>", function() dialmanip("increment", "gvisual") end)
-map("v", "<C-gx>", function() dialmanip("decrement", "gvisual") end)
+-- local dialmanip = require("dial.map").manipulate
+-- map("n", "<C-a>",  function() dialmanip("increment", "normal")  end)
+-- map("n", "<C-x>",  function() dialmanip("decrement", "normal")  end)
+-- map("n", "<C-ga>", function() dialmanip("increment", "gnormal") end)
+-- map("n", "<C-gx>", function() dialmanip("decrement", "gnormal") end)
+-- map("v", "<C-a>",  function() dialmanip("increment", "visual")  end)
+-- map("v", "<C-x>",  function() dialmanip("decrement", "visual")  end)
+-- map("v", "<C-ga>", function() dialmanip("increment", "gvisual") end)
+-- map("v", "<C-gx>", function() dialmanip("decrement", "gvisual") end)
 
 -- vim-easy-align
 -- map("v", "ga", "<Plug>(EasyAlign)")
@@ -50,47 +49,83 @@ local scis = require("scissors")
 map( "n", "<leader>se",          function() scis.editSnippet()   end, { desc = "Snippet: Edit" })
 map( { "n", "x" }, "<leader>sa", function() scis.addNewSnippet() end, { desc = "Snippet: Add" })
 
+-- csvview
+local csvtoggle = require("csvview").toggle
+map( "n", "<leader>vc", function() csvtoggle(0, {}) end, { desc = "Toggle CSV Viewing Mode" })
+
+
+-- asciidoc
+vim.keymap.set('n', '<Leader>cp', ':AsciiDocPreview<CR>', { desc = 'Preview AsciiDoc document', silent=true })
+
 -- multi-curosr
 -- Add or skip cursor above/below the main cursor.
-local mc = require("multicursor-nvim")
-map({"n", "x"}, "<up>",           function() mc.lineAddCursor(-1)  end)
-map({"n", "x"}, "<down>",         function() mc.lineAddCursor(1)   end)
-map({"n", "x"}, "<leader><up>",   function() mc.lineSkipCursor(-1) end)
-map({"n", "x"}, "<leader><down>", function() mc.lineSkipCursor(1)  end)
+-- local mc = require("multicursor-nvim")
+-- map({"n", "x"}, "<up>",           function() mc.lineAddCursor(-1)  end)
+-- map({"n", "x"}, "<down>",         function() mc.lineAddCursor(1)   end)
+-- map({"n", "x"}, "<leader><up>",   function() mc.lineSkipCursor(-1) end)
+-- map({"n", "x"}, "<leader><down>", function() mc.lineSkipCursor(1)  end)
+--
+-- -- Add or skip adding a new cursor by matching word/selection
+-- map({"n", "x"}, "<leader>n", function() mc.matchAddCursor(1)   end)
+-- map({"n", "x"}, "<leader>s", function() mc.matchSkipCursor(1)  end)
+-- map({"n", "x"}, "<leader>N", function() mc.matchAddCursor(-1)  end)
+-- map({"n", "x"}, "<leader>S", function() mc.matchSkipCursor(-1) end)
+--
+-- -- Add and remove cursors with control + left click.
+-- map("n", "<c-leftmouse>", mc.handleMouse)
+-- map("n", "<c-leftdrag>", mc.handleMouseDrag)
+-- map("n", "<c-leftrelease>", mc.handleMouseRelease)
+--
+-- -- Disable and enable cursors.
+-- map({"n", "x"}, "<c-q>", mc.toggleCursor)
+--
+-- -- Mappings defined in a keymap layer only apply when there are
+-- -- multiple cursors. This lets you have overlapping mappings.
+-- mc.addKeymapLayer(function(layerSet)
+--
+--   -- Select a different cursor as the main one.
+--   layerSet({"n", "x"}, "<left>", mc.prevCursor)
+--   layerSet({"n", "x"}, "<right>", mc.nextCursor)
+--
+--   -- Delete the main cursor.
+--   layerSet({"n", "x"}, "<leader>x", mc.deleteCursor)
+--
+--   -- Enable and clear cursors using escape.
+--   layerSet("n", "<esc>", function()
+--     if not mc.cursorsEnabled() then
+--       mc.enableCursors()
+--     else
+--       mc.clearCursors()
+--     end
+--   end)
+-- end)
 
--- Add or skip adding a new cursor by matching word/selection
-map({"n", "x"}, "<leader>n", function() mc.matchAddCursor(1)   end)
-map({"n", "x"}, "<leader>s", function() mc.matchSkipCursor(1)  end)
-map({"n", "x"}, "<leader>N", function() mc.matchAddCursor(-1)  end)
-map({"n", "x"}, "<leader>S", function() mc.matchSkipCursor(-1) end)
+-- asciiwave rendering
+map( "v", "<leader>vw1", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv1s<CR>", {silent=true, desc="Render WaveJSON in place 1 tall"})
+map( "v", "<leader>vw2", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv2s<CR>", {silent=true, desc="Render WaveJSON in place 2 tall"})
+map( "v", "<leader>vw3", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv3s<CR>", {silent=true, desc="Render WaveJSON in place 3 tall"})
+map( "v", "<leader>vw4", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv4s<CR>", {silent=true, desc="Render WaveJSON in place 4 tall"})
+map( "v", "<leader>vw5", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv5s<CR>", {silent=true, desc="Render WaveJSON in place 5 tall"})
+map( "v", "<leader>vw6", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv6s<CR>", {silent=true, desc="Render WaveJSON in place 6 tall"})
 
--- Add and remove cursors with control + left click.
-map("n", "<c-leftmouse>", mc.handleMouse)
-map("n", "<c-leftdrag>", mc.handleMouseDrag)
-map("n", "<c-leftrelease>", mc.handleMouseRelease)
+map( "v", "<leader>vW1", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv1s<CR>", {silent=true, desc="Render WaveJSON in place 1 tall"})
+map( "v", "<leader>vW2", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv2s<CR>", {silent=true, desc="Render WaveJSON in place 2 tall"})
+map( "v", "<leader>vW3", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv3s<CR>", {silent=true, desc="Render WaveJSON in place 3 tall"})
+map( "v", "<leader>vW4", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv4s<CR>", {silent=true, desc="Render WaveJSON in place 4 tall"})
+map( "v", "<leader>vW5", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv5s<CR>", {silent=true, desc="Render WaveJSON in place 5 tall"})
+map( "v", "<leader>vW6", ":!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv6s<CR>", {silent=true, desc="Render WaveJSON in place 6 tall"})
 
--- Disable and enable cursors.
-map({"n", "x"}, "<c-q>", mc.toggleCursor)
+map( "n", "<leader>vw1", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv1s<CR>", {silent=true, desc="Render WaveJSON in place 1 tall"})
+map( "n", "<leader>vw2", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv2s<CR>", {silent=true, desc="Render WaveJSON in place 2 tall"})
+map( "n", "<leader>vw3", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv3s<CR>", {silent=true, desc="Render WaveJSON in place 3 tall"})
+map( "n", "<leader>vw4", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv4s<CR>", {silent=true, desc="Render WaveJSON in place 4 tall"})
+map( "n", "<leader>vw5", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv5s<CR>", {silent=true, desc="Render WaveJSON in place 5 tall"})
+map( "n", "<leader>vw6", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -pv6s<CR>", {silent=true, desc="Render WaveJSON in place 6 tall"})
 
--- Mappings defined in a keymap layer only apply when there are
--- multiple cursors. This lets you have overlapping mappings.
-mc.addKeymapLayer(function(layerSet)
-
-  -- Select a different cursor as the main one.
-  layerSet({"n", "x"}, "<left>", mc.prevCursor)
-  layerSet({"n", "x"}, "<right>", mc.nextCursor)
-
-  -- Delete the main cursor.
-  layerSet({"n", "x"}, "<leader>x", mc.deleteCursor)
-
-  -- Enable and clear cursors using escape.
-  layerSet("n", "<esc>", function()
-    if not mc.cursorsEnabled() then
-      mc.enableCursors()
-    else
-      mc.clearCursors()
-    end
-  end)
-end)
-
+map( "n", "<leader>vW1", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv1s<CR>", {silent=true, desc="Render WaveJSON in place 1 tall"})
+map( "n", "<leader>vW2", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv2s<CR>", {silent=true, desc="Render WaveJSON in place 2 tall"})
+map( "n", "<leader>vW3", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv3s<CR>", {silent=true, desc="Render WaveJSON in place 3 tall"})
+map( "n", "<leader>vW4", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv4s<CR>", {silent=true, desc="Render WaveJSON in place 4 tall"})
+map( "n", "<leader>vW5", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv5s<CR>", {silent=true, desc="Render WaveJSON in place 5 tall"})
+map( "n", "<leader>vW6", "V0%:!/Users/bcope/git_clones/asciiwave/bin/asciiwave -gpv6s<CR>", {silent=true, desc="Render WaveJSON in place 6 tall"})
 

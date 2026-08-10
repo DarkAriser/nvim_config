@@ -1,5 +1,0 @@
-return {
-  {
-    "rlane/pounce.nvim",
-  }
-}
